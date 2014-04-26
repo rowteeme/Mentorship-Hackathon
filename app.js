@@ -45,7 +45,7 @@ app.route("/sign")
 
 // This route collects the Oauth access token, then uses that token to search for a user's location
 // Using that user's location we then search for the merchant locations and send them to the FE as JSON
-/*app.route("/search")
+app.route("/search")
     .get(function(req, res){
         var token = req.query.code;
         console.log(token);
@@ -76,9 +76,10 @@ app.route("/sign")
 
                 var gotMerch = JSON.parse(merch);
             });
+
+            res.send(gotMerch);
         });
-        res.send(gotMerch);
-    });*/
+    });
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
