@@ -1,8 +1,11 @@
 var hackApp = angular.module('hackApp', []);
 
 hackApp.controller('SearchCtrl', ['$scope', '$http', function ($scope) {
-    $scope.prompt = 'What are you in the mood for?';
+    $scope.prompt = 'What kind of cuisine would you like? (ex: American, Mexican, Chinese)';
     $scope.searchQuery = {};
+
+
+
 
 }]);
 hackApp.controller('OrderCtrl', ['$scope', function ($scope) {}]);

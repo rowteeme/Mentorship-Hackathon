@@ -76,11 +76,11 @@ a {
 
 /* ###### SEARCH BAR STYLING ###### */
 
-#search-section > input[type="text"] {
+#search-section > input[type="dropdown"] {
     font-size: 1.4em;
     font-weight: 300;
 }
 
-i.inverted.search.large.icon {
+i.inverted.dropdown.large.icon {
     background: #627FA5;
 }
