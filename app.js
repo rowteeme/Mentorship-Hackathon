@@ -46,39 +46,45 @@ app.route("/sign")
 // This route collects the Oauth access token, then uses that token to search for a user's location
 // Using that user's location we then search for the merchant locations and send them to the FE as JSON
 app.route("/search")
-    .get(function(req, res){
+    .get(function(req, resf){
         var token = req.query.code;
         console.log(token);
         var options = {
-            url : 'http://sandbox.delivery.com/customer/location/',
+            url : 'https://sandbox.delivery.com/customer/location?client_id=YmYxMmEzOGFiMWQwODczM2NkMzI1MGQ2Mjk1NzcyYTNl',
             headers : {
-                'Authorization' : 'Bearer ' + token
+                'Authorization' : 'lNypHJ4T9XV0ru6IrA8IzxyiNiiLxEn2twPsqrn7'
+
             }
         }
         request(options, function(err, res, loc){
-            console.log(loc);
+            var quick2 = JSON.parse(loc);
+            console.log(quick2);
+
 
             var data = JSON.parse(loc);
-            var street = data.locations[0].street;
-            var state = data.locations[0].state;
-            var city = data.locations[0].city;
-            var zip = data.locations[0].zip_code;
+            var longt = 'longitude=' + data.locations[0].longitude;
+            var lat = 'latitude=' + data.locations[0].latitude;
+
+            console.log(longt);
+            console.log(lat);
 
             var mechOpts = {
-                url : 'http://sandbox.delivery.com/merchant/search/address?' + street + ',' + city + ',' + state,
+                url : 'http://sandbox.delivery.com/merchant/search/delivery?' + lat + '&' + longt,
                 headers : {
-                    'Authorization' : token
+                'Authorization' : 'lNypHJ4T9XV0ru6IrA8IzxyiNiiLxEn2twPsqrn7'
+
                 }
             }
 
-            request(mechOpts, function(err, res, merch){
-                console.log(merch)
+            request(mechOpts, function(err, resp, merch){
 
                 var gotMerch = JSON.parse(merch);
+                console.log(gotMerch);
+                resf.send(gotMerch);
             });
 
-            res.send(gotMerch);
         });
+        resf.send('hello world');
     });
 
 /// catch 404 and forwarding to error handler
