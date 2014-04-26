@@ -1,8 +1,86 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  font: 62.5% 'Open Sans', Helvetica, Arial, sans-serif;
+  color: #404040;
+  background: #F3F0F3;
+  height: 1000px;
+  overflow: hidden;
+}
+
+#hero {
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Open Sans', Helvetica, sans-serif;
+    font-size: 5em;
+    color: #3b598b;
+    font-weight: 800;
+    font-style: italic;
+    text-rendering: optimizeLegibility;
+}
+
+.kvp {
+    border-bottom: 2px solid #3b598b;
+}
+
+h2 {
+    font-size: 3em;
+    font-weight: 300;
 }
 
 a {
-  color: #00B7FF;
+  color: #3b598b;
+}
+
+/* ###### SIDEBAR STYLING + TRANSITIONS ###### */
+
+#site-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+#site-canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    transition: .3s ease all;
+    padding: 5% 0;
+
+    height: 5000px;
+}
+
+#suggestions-sidebar {
+    width: 475px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 475px;
+    background: #545454;
+    padding: 15px;
+}
+
+#site-wrapper.show-nav #site-canvas {
+    -webkit-transform: translateX(-475px);
+    transform: translateX(-475px);
+}
+
+#suggestions-sidebar {
+    background: #627FA5;
+    opacity: .5;
+}
+
+/* ###### SEARCH BAR STYLING ###### */
+
+#search-section > input[type="dropdown"] {
+    font-size: 1.4em;
+    font-weight: 300;
+}
+
+i.inverted.dropdown.large.icon {
+    background: #627FA5;
 }
