@@ -9,5 +9,6 @@ Authors:
 
 Rotimi Oyewole
 Max Baldwin
+Kevin Turano
 
 
