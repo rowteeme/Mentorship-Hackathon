@@ -4,6 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var request = require('request');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -24,12 +25,67 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-app.route("/hello")
-    
+
+app.route("/sign")
+
     .get(function(req, res){
+        var token = "client_id=YmYxMmEzOGFiMWQwODczM2NkMzI1MGQ2Mjk1NzcyYTNl";
+        var redirect = "redirect_uri=http://localhost:3000/client";
+        var response = "response_type=code";
+        var scope = "scope=global";
+        var state = "state=app";
+        var url = "http://sandbox.delivery.com/third_party/authorize?" + token + "&" + redirect + "&" + response + "&" + scope + "&" + state;
+
+        request(url, function(err, res, body){
+            console.log(url);
+        });
         res.send("hello world");
     });
 
+
+// This route collects the Oauth access token, then uses that token to search for a user's location
+// Using that user's location we then search for the merchant locations and send them to the FE as JSON
+app.route("/search")
+    .get(function(req, resf){
+        var token = req.query.code;
+        console.log(token);
+        var options = {
+            url : 'https://sandbox.delivery.com/customer/location?client_id=YmYxMmEzOGFiMWQwODczM2NkMzI1MGQ2Mjk1NzcyYTNl',
+            headers : {
+                'Authorization' : 'lNypHJ4T9XV0ru6IrA8IzxyiNiiLxEn2twPsqrn7'
+
+            }
+        }
+        request(options, function(err, res, loc){
+            var quick2 = JSON.parse(loc);
+            console.log(quick2);
+
+
+            var data = JSON.parse(loc);
+            var longt = 'longitude=' + data.locations[0].longitude;
+            var lat = 'latitude=' + data.locations[0].latitude;
+
+            console.log(longt);
+            console.log(lat);
+
+            var mechOpts = {
+                url : 'http://sandbox.delivery.com/merchant/search/delivery?' + lat + '&' + longt,
+                headers : {
+                'Authorization' : 'lNypHJ4T9XV0ru6IrA8IzxyiNiiLxEn2twPsqrn7'
+
+                }
+            }
+
+            request(mechOpts, function(err, resp, merch){
+
+                var gotMerch = JSON.parse(merch);
+                console.log(gotMerch);
+                resf.send(gotMerch);
+            });
+
+        });
+        resf.send('hello world');
+    });
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
