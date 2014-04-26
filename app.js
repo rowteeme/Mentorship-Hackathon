@@ -47,6 +47,7 @@ app.route("/sign")
 // Using that user's location we then search for the merchant locations and send them to the FE as JSON
 app.route("/search")
     .get(function(req, resf){
+
         var token = req.query.code;
         console.log(token);
         var options = {
@@ -84,7 +85,6 @@ app.route("/search")
             });
 
         });
-        resf.send('hello world');
     });
 
 /// catch 404 and forwarding to error handler
