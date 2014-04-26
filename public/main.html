@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hackathon Delivery.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!--  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/flat-ui/2.0/css/flat-ui.css"> -->
+
+    <!-- LOAD SEMANTIC UI + ICON FONTS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/css/semantic.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/javascript/semantic.js">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/fonts/icons.ttf">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/fonts/icons.svg">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/fonts/icons.woff">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/fonts/icons.eot">
+
+    <!-- LOAD PAGE FONTS + STYLES -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.2/webfont.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+
+    <!-- LOAD EXTERNAL SCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+
+    <!-- LOAD APP SCRIPTS -->
+    <script src="js/fonts.js"></script>
+    <script src="js/semantic-behavior.js"></script>
+    <script src="app/app.js"></script>
+
+</head>
+<body ng-app="hackApp">
+    <div id="site-wrapper">
+        <div id="site-canvas">
+            <div class="row ui page grid">
+                <div class="ui one column header" id="hero">
+                    <h1>Delivery+</h1>
+                    <h2><span class="kvp">Faster</span>, <span class="kvp">Tastier</span> and <span class="kvp">Cheaper</span> Delivery.com Food</h2>
+                    <p><a href="#" id="sidebar-trigger">Click here to reveal suggestions!</a></p>
+                </div><!--end hero-->
+            </div> <!-- end row -->
+            <div class="row ui page grid center">
+                <div ng-controller="SearchCtrl" id="search-section" class="ui fluid massive icon input" >
+                    <input type="dropdown" placeholder=" {{ prompt }} " ng-model="searchQuery.cuisine">
+                    <i class="inverted search large icon"></i>
+                </div><!-- end search-section -->
+                <div id="suggestions-sidebar" class="ui right very wide sidebar">
+                    <div class="ui page grid center segment"><h2>Improve your order!</h2></div>
+                </div><!-- end suggestions-sidebar-->
+            </div><!-- end row-->
+        </div><!-- end site-canvas-->
+    </div><!-- end page-->
+
+
+
+<!-- Content + Directives + Views go here -->
+
+</body>
+
+
+</html>

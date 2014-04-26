@@ -16,6 +16,7 @@
     "nodemon" : "*",
     "mongoose" : "*",
     "request" : "*",
-    "cheerio" : "*"
+    "cheerio" : "*",
+    "node-oauth" : "*"
   }
 }
