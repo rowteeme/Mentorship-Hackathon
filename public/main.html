@@ -40,22 +40,38 @@
                     <p><a href="#" id="sidebar-trigger">Click here to reveal suggestions!</a></p>
                 </div><!--end hero-->
             </div> <!-- end row -->
-            <div class="row ui page grid center">
-                <div ng-controller="SearchCtrl" id="search-section" class="ui fluid massive icon input" >
-                    <input type="dropdown" placeholder=" {{ prompt }} " ng-model="searchQuery.cuisine">
-                    <i class="inverted search large icon"></i>
+            <div class="row ui page grid center" ng-controller="SearchCtrl">
+                <div id="search-section" class="ui fluid massive icon input" >
+
+                    <input type="search" placeholder=" {{ prompt }} " ng-model="searchQuery.query">
+                    <i class="inverted search large icon" ng-click="search"></i>
+
                 </div><!-- end search-section -->
                 <div id="suggestions-sidebar" class="ui right very wide sidebar">
                     <div class="ui page grid center segment"><h2>Improve your order!</h2></div>
                 </div><!-- end suggestions-sidebar-->
+                <div id="results" class="row ui page grid center">
+                    <div class="ui one column">
+                        <!-- <p>Popular choices in your neighborhood:</p>
+                        <ul>
+                            <li ng-repeat="popular in searchQuery.results">
+                                {{ popular_cuisine }}
+                            </li>
+                        </ul> -->
+                        <!-- <p>I want: {{ searchQuery.results }}</p> -->
+                        <ul>
+                            <li ng-repeat="cuisine in searchQuery.merchants.summary.cuisines | filter:searchQuery.query">
+                                {{ cuisine }}
+                            </li>
+                        </ul>
+                        <ul>
+                            <li ng-repeat="retaurant in searchQuery.restaurants | filter:searchQuery.query | limitTo:100"
+                        </ul>
+                    </div><!-- end one column-->
+                </div><!-- end results row -->
             </div><!-- end row-->
         </div><!-- end site-canvas-->
     </div><!-- end page-->
-
-
-
-<!-- Content + Directives + Views go here -->
-
 </body>
 
 
