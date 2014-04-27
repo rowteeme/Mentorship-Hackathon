@@ -58,14 +58,16 @@
                                 {{ popular_cuisine }}
                             </li>
                         </ul> -->
-                        <!-- <p>I want: {{ searchQuery.results }}</p> -->
+                        <p ng-model="searchQuery.query">I want: {{ searchQuery.results.id }}</p>
                         <ul>
-                            <li ng-repeat="cuisine in searchQuery.merchants.summary.cuisines | filter:searchQuery.query">
-                                {{ cuisine }}
+                            <li ng-repeat="restaurant in searchQuery.results[4]">
+                                {{ searchQuery.results.id }}
                             </li>
                         </ul>
                         <ul>
-                            <li ng-repeat="retaurant in searchQuery.restaurants | filter:searchQuery.query | limitTo:100"
+                            <li ng-repeat="restaurant in searchQuery.results.summary.cuisines | filter:searchQuery.query">
+                                {{ searchQuery.results.id }}
+                            </li>
                         </ul>
                     </div><!-- end one column-->
                 </div><!-- end results row -->

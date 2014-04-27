@@ -6,8 +6,11 @@ hackApp.controller('SearchCtrl', ['$scope', '$http', function ($scope, $http) {
 
 
         $scope.searchQuery.results = {};
-        // $scope.searchQuery.merchants = {};
+        $scope.searchQuery.merchants = {};
+        $scope.searchQuery.results.id = '';
         // $scope.searchQuery.overall_rating = {};
+        $scope.searchQuery.restaurantResults = {};
+        $scope.searchQuery.restuarantID = '';
 
 
 
@@ -22,8 +25,14 @@ hackApp.controller('SearchCtrl', ['$scope', '$http', function ($scope, $http) {
         var count = (Object.keys(data.merchants).length);
 
         for(i=0; i <= count; i++) {
-           $scope.searchQuery.results = data.merchants[i].summary.cuisines;
-           console.log($scope.searchQuery.results);
+           $scope.searchQuery.results = data.merchants[i];
+           $scope.restaurantResults = [];
+            // angular.forEach($scope.restaurantResults, function( id, summary){
+            //     $scope.restaurantResults.push({id: id, summary: summary});
+            // });
+           console.log($scope.searchQuery.results.id);
+           console.log($scope.searchQuery.results.summary.cuisines);
+           // console.log($scope.restaurantResults.summary);
         }
 
         // $scope.searchQuery.restaurants =
