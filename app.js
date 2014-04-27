@@ -75,8 +75,10 @@ app.route("/search")
             var quick2 = JSON.parse(loc);
 
             var data = JSON.parse(loc);
-            var longt = 'longitude=' + data.locations[0].longitude;
-            var lat = 'latitude=' + data.locations[0].latitude;
+            //var longt = 'longitude=' + data.locations[0].longitude;
+            //var lat = 'latitude=' + data.locations[0].latitude;
+            var longt = 'longitude=-73.986110';
+            var lat = 'latitude=40.693508';
 
             var mechOpts = {
                 url : 'http://sandbox.delivery.com/merchant/search/delivery?' + lat + '&' + longt,

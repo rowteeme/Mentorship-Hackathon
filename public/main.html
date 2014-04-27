@@ -58,12 +58,11 @@
                                 {{ popular_cuisine }}
                             </li>
                         </ul> -->
-                        <p ng-model="query">I want: {{ query }}</p>
+                        <p ng-model="query">I want: {{ query.summary.cuisines }}</p>
 
                         <ul>
                             <li ng-repeat="rest in restaurants | filter: query">
-                                <!-- <a href="/menu.html/?id=" + {{searchQuery.searchResults.id}} + > {{ restaurant }}</a> -->
-                                {{ rest.summary.name }}
+                                <a ng-model="ID" href="/menu.html/?id={{ rest.id }}"> {{ rest.summary.name }}</a>
                             </li>
                         </ul>
                     </div><!-- end one column-->
