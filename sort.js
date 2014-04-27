@@ -33,5 +33,23 @@ var rest = [
 
 ]
 
+var count = (Object.keys(gotMerch.merchants).length) + 1;
+
+request(mechOpts, function(err, resp, merch){
+
+                var gotMerch = JSON.parse(merch);
+                for(var i=1;i<5;i++) {
+                    console.log(gotMerch.merchants[i].id);
+                }
+                resf.send(gotMerch);
+            });
+
+            gotMerch.merchants[i].id
+
+gotMerch.merchants[0].id
 
 var rating = sortBy(rest, 'rating');
+
+                for(var i = 0;i < gotMerch.length; i++) {
+                    console.log(gotMerch.merchants[i]);
+                }

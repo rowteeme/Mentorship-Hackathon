@@ -6,3 +6,18 @@ function sortBy(array, key) {
     });
 }
 // sort function end
+$(document).ready(function(){
+  $.ajax({
+    url : 'http://localhost:3000/menu/90',
+    method : 'GET',
+    success : function(res){
+      var count = (Object.keys(res.menu).length);
+      for(var i = 0; i <= count; i++) {
+        console.log(res.menu);
+      }
+    }
+
+  });
+});
+
+

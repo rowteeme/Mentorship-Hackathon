@@ -17,6 +17,7 @@
     "mongoose" : "*",
     "request" : "*",
     "cheerio" : "*",
-    "node-oauth" : "*"
+    "node-oauth" : "*",
+    "json-filter" : "*",
   }
 }

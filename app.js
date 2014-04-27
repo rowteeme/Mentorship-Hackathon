@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var request = require('request');
+var mongoose = require('mongoose');
+var fs = require('fs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -25,6 +27,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+mongoose.connect('mongodb://localhost/merchants');
+
+var merchScheme = new mongoose.Schema({
+    merch_id : String,
+    name: String,
+    distance : String,
+    rating : String,
+    time : Number,
+    cuisines : String
+});
+
+var merchModel = mongoose.model('scraps', merchScheme);
 
 app.route("/sign")
 
@@ -48,42 +62,69 @@ app.route("/sign")
 app.route("/search")
     .get(function(req, resf){
 
-        var token = req.query.code;
-        console.log(token);
+        //var token = req.query.code;
+        var token = 'lNypHJ4T9XV0ru6IrA8IzxyiNiiLxEn2twPsqrn7'
         var options = {
             url : 'https://sandbox.delivery.com/customer/location?client_id=YmYxMmEzOGFiMWQwODczM2NkMzI1MGQ2Mjk1NzcyYTNl',
             headers : {
-                'Authorization' : 'lNypHJ4T9XV0ru6IrA8IzxyiNiiLxEn2twPsqrn7'
+                'Authorization' : token
 
             }
         }
         request(options, function(err, res, loc){
             var quick2 = JSON.parse(loc);
-            console.log(quick2);
-
 
             var data = JSON.parse(loc);
             var longt = 'longitude=' + data.locations[0].longitude;
             var lat = 'latitude=' + data.locations[0].latitude;
 
-            console.log(longt);
-            console.log(lat);
-
             var mechOpts = {
                 url : 'http://sandbox.delivery.com/merchant/search/delivery?' + lat + '&' + longt,
                 headers : {
-                'Authorization' : 'lNypHJ4T9XV0ru6IrA8IzxyiNiiLxEn2twPsqrn7'
-
+                'Authorization' : token
                 }
             }
 
             request(mechOpts, function(err, resp, merch){
 
                 var gotMerch = JSON.parse(merch);
-                console.log(gotMerch);
+                var count = (Object.keys(gotMerch.merchants).length);
+                for(var i=0;i<count;i++) {
+
+                    var id = gotMerch.merchants[i].id;
+                    var name = gotMerch.merchants[i].summary.name;
+                    var distance = gotMerch.merchants[i].location.distance;
+                    var rating = gotMerch.merchants[i].summary.overall_rating;
+                    var cuisine = gotMerch.merchants[i].summary.cuisines;
+
+                            var storeMerch = new merchModel({
+                                merch_id : id,
+                                name : name,
+                                distance : distance,
+                                rating : rating,
+                                cuisines : cuisine
+                            }).save(function(pro, storeMerch){
+                                if(pro) {
+                                    console.log(err);
+                                }
+                            });
+                }
                 resf.send(gotMerch);
+
             });
 
+        });
+    });
+
+app.route('/menu/:id')
+    .get(function(req, res){
+        var id = req.params.id;
+
+        var url = 'http://sandbox.delivery.com/merchant/' + id + '/menu?item_only=1';
+
+        request(url, function(err, resp, menu){
+            var pMenu = JSON.parse(menu);
+            res.send(pMenu);
         });
     });
 
