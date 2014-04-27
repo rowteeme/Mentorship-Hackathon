@@ -43,7 +43,7 @@
             <div class="row ui page grid center" ng-controller="SearchCtrl">
                 <div id="search-section" class="ui fluid massive icon input" >
 
-                    <input type="search" placeholder=" {{ prompt }} " ng-model="searchQuery.query">
+                    <input type="search" placeholder=" {{ prompt }} " ng-model="query.summary.cuisines">
                     <i class="inverted search large icon" ng-click="search"></i>
 
                 </div><!-- end search-section -->
@@ -58,15 +58,12 @@
                                 {{ popular_cuisine }}
                             </li>
                         </ul> -->
-                        <p ng-model="searchQuery.query">I want: {{ searchQuery.results.id }}</p>
+                        <p ng-model="query">I want: {{ query }}</p>
+
                         <ul>
-                            <li ng-repeat="restaurant in searchQuery.results[4]">
-                                {{ searchQuery.results.id }}
-                            </li>
-                        </ul>
-                        <ul>
-                            <li ng-repeat="restaurant in searchQuery.results.summary.cuisines | filter:searchQuery.query">
-                                {{ searchQuery.results.id }}
+                            <li ng-repeat="rest in restaurants | filter: query">
+                                <!-- <a href="/menu.html/?id=" + {{searchQuery.searchResults.id}} + > {{ restaurant }}</a> -->
+                                {{ rest.summary.name }}
                             </li>
                         </ul>
                     </div><!-- end one column-->
