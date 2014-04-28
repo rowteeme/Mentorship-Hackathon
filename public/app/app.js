@@ -17,18 +17,21 @@ hackApp.controller('SearchCtrl', ['$scope', '$http', function ($scope, $http) {
         console.log(data);
         $scope.restaurants = data.merchants;
         $scope.ID = data.merchants.id;
-        });
-
-    $http({
-        method: 'GET',
-        url: '//localhost:3000/menu/90'
-    })
-
-    .success ( function (data, status, headers, config) {
-        // $scope.restaurants.id = data.id;
-        console.log(data);
-
+        })
+    .error( function(data, status, headers, config) {
+        console.log('Error');
     });
+
+    // $http({
+    //     method: 'GET',
+    //     url: '//localhost:3000/menu/90'
+    // })
+
+    // .success ( function (data, status, headers, config) {
+    //     // $scope.restaurants.id = data.id;
+    //     console.log(data);
+
+    // });
 
 }]);
 hackApp.controller('OrderCtrl', ['$scope', function ($scope) {}]);

@@ -72,7 +72,7 @@ app.route("/search")
             }
         }
         request(options, function(err, res, loc){
-            var quick2 = JSON.parse(loc);
+            // var quick2 = JSON.parse(loc);
 
             var data = JSON.parse(loc);
             //var longt = 'longitude=' + data.locations[0].longitude;
@@ -88,8 +88,12 @@ app.route("/search")
             }
 
             request(mechOpts, function(err, resp, merch){
-
+                try {
                 var gotMerch = JSON.parse(merch);
+                } catch(err) {
+                    console.log(err);
+                    return false;
+                }
                 var count = (Object.keys(gotMerch.merchants).length);
                 for(var i=0;i<count;i++) {
 
