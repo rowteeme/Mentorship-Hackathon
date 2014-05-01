@@ -33,17 +33,17 @@
 <body ng-app="hackApp">
     <div id="site-wrapper">
         <div id="site-canvas">
-            <div class="row ui page grid">
+            <div id="overlay" class="row ui page grid">
                 <div class="ui one column header" id="hero">
                     <h1>Delivery+</h1>
-                    <h2><span class="kvp">Faster</span>, <span class="kvp">Tastier</span> and <span class="kvp">Cheaper</span> Delivery.com Food</h2>
-                    <p><a href="#" id="sidebar-trigger">Click here to reveal suggestions!</a></p>
+                    <h2><span class="kvp">Faster</span>, <span class="kvp">Tastier</span> and <span class="kvp">Cheaper</span> Food from Delivery.com</h2>
+                    <!-- <p><a href="#" id="sidebar-trigger">Click here to reveal suggestions!</a></p> -->
                 </div><!--end hero-->
             </div> <!-- end row -->
             <div class="row ui page grid center" ng-controller="SearchCtrl">
                 <div id="search-section" class="ui fluid massive icon input" >
 
-                    <input type="search" placeholder=" {{ prompt }} " ng-model="searchQuery.query">
+                    <input type="search" placeholder=" {{ prompt }} " ng-model="query.summary.cuisines">
                     <i class="inverted search large icon" ng-click="search"></i>
 
                 </div><!-- end search-section -->
@@ -58,15 +58,11 @@
                                 {{ popular_cuisine }}
                             </li>
                         </ul> -->
-                        <p ng-model="searchQuery.query">I want: {{ searchQuery.results.id }}</p>
+                        <p id="lead-text" ng-model="query">Restaurants in your neighborhood serving... {{ query.summary.cuisines }}</p>
+
                         <ul>
-                            <li ng-repeat="restaurant in searchQuery.results[4]">
-                                {{ searchQuery.results.id }}
-                            </li>
-                        </ul>
-                        <ul>
-                            <li ng-repeat="restaurant in searchQuery.results.summary.cuisines | filter:searchQuery.query">
-                                {{ searchQuery.results.id }}
+                            <li ng-repeat="rest in restaurants | filter: query">
+                                <a ng-model="ID" href="/examples/feed.html"> {{ rest.summary.name }}</a>
                             </li>
                         </ul>
                     </div><!-- end one column-->

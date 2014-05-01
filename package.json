@@ -18,6 +18,6 @@
     "request" : "*",
     "cheerio" : "*",
     "node-oauth" : "*",
-    "json-filter" : "*",
+    "json-filter" : "*"
   }
 }
