@@ -72,11 +72,13 @@ app.route("/search")
             }
         }
         request(options, function(err, res, loc){
-            var quick2 = JSON.parse(loc);
+            // var quick2 = JSON.parse(loc);
 
             var data = JSON.parse(loc);
-            var longt = 'longitude=' + data.locations[0].longitude;
-            var lat = 'latitude=' + data.locations[0].latitude;
+            //var longt = 'longitude=' + data.locations[0].longitude;
+            //var lat = 'latitude=' + data.locations[0].latitude;
+            var longt = 'longitude=-73.986110';
+            var lat = 'latitude=40.693508';
 
             var mechOpts = {
                 url : 'http://sandbox.delivery.com/merchant/search/delivery?' + lat + '&' + longt,
@@ -86,8 +88,12 @@ app.route("/search")
             }
 
             request(mechOpts, function(err, resp, merch){
-
+                try {
                 var gotMerch = JSON.parse(merch);
+                } catch(err) {
+                    console.log(err);
+                    return false;
+                }
                 var count = (Object.keys(gotMerch.merchants).length);
                 for(var i=0;i<count;i++) {
 

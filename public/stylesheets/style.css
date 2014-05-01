@@ -13,6 +13,10 @@ body {
   -o-background-size: cover;
   background-size: cover;
   background-position: center;
+<<<<<<< HEAD
+=======
+  overflow: hidden;
+>>>>>>> FETCH_HEAD
 /*  min-height: 100%;*/
 }
 

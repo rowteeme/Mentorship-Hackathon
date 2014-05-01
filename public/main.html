@@ -62,7 +62,11 @@
 
                         <ul>
                             <li ng-repeat="rest in restaurants | filter: query">
+<<<<<<< HEAD
                                 <a ng-model="ID" href="/examples/feed.html"> {{ rest.summary.name }}</a>
+=======
+                                <a ng-model="ID" href="/menu.html/?id={{ rest.id }}"> {{ rest.summary.name }}</a>
+>>>>>>> FETCH_HEAD
                             </li>
                         </ul>
                     </div><!-- end one column-->
